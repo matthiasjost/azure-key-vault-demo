@@ -1,3 +1,6 @@
+using Azure.Identity;
+
+
 namespace AzureKeyVaultDemo.WebApi
 {
     public class Program
@@ -21,6 +24,10 @@ namespace AzureKeyVaultDemo.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            builder.Configuration.AddAzureKeyVault(
+                new Uri(builder.Configuration["AzureKeyVaultUri"]),
+                new DefaultAzureCredential());
 
             app.UseHttpsRedirection();
 
